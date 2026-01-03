@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-01-03T05:25:07.453612",
+  "total_tests": 1,
+  "passed_tests": 0,
+  "success_rate": 0.0,
+  "results": [
+    {
+      "test_name": "User Registration",
+      "success": false,
+      "details": "Expected 200, got 520: Web server returned an unknown error\n",
+      "timestamp": "2026-01-03T05:25:07.452926"
+    }
+  ]
+}
