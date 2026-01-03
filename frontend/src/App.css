@@ -1,34 +1,57 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+.gradient-hero {
+  background: linear-gradient(135deg, #064e3b 0%, #052e16 50%, #000000 100%);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.App-link {
-    color: #61dafb;
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(6, 78, 59, 0.15);
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.btn-primary {
+  background: #064e3b;
+  color: white;
+  border-radius: 9999px;
+  padding: 0.75rem 2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #065f46;
+  transform: scale(1.05);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #064e3b 0%, #84cc16 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.metric-card {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(6, 78, 59, 0.1);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  border-color: #064e3b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(6, 78, 59, 0.08);
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
 }
