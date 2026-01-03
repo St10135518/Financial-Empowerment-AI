@@ -1,14 +1,140 @@
 {
-  "timestamp": "2026-01-03T05:25:07.453612",
-  "total_tests": 1,
-  "passed_tests": 0,
-  "success_rate": 0.0,
+  "timestamp": "2026-01-03T05:27:34.514864",
+  "total_tests": 22,
+  "passed_tests": 22,
+  "success_rate": 100.0,
   "results": [
     {
       "test_name": "User Registration",
-      "success": false,
-      "details": "Expected 200, got 520: Web server returned an unknown error\n",
-      "timestamp": "2026-01-03T05:25:07.452926"
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:05.918846"
+    },
+    {
+      "test_name": "User Login",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:06.179521"
+    },
+    {
+      "test_name": "Get Current User",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:06.221097"
+    },
+    {
+      "test_name": "Get Profile",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:06.263100"
+    },
+    {
+      "test_name": "Update Profile",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:06.302215"
+    },
+    {
+      "test_name": "Generate Income Opportunities",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:21.334058"
+    },
+    {
+      "test_name": "Get Income Opportunities",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:21.385964"
+    },
+    {
+      "test_name": "Analyze Budget",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:33.355614"
+    },
+    {
+      "test_name": "Get Latest Budget Analysis",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:33.405723"
+    },
+    {
+      "test_name": "Get Investment Advice",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:57.061270"
+    },
+    {
+      "test_name": "Get Latest Investment Advice",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:26:57.128672"
+    },
+    {
+      "test_name": "Scan Opportunities",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:19.823458"
+    },
+    {
+      "test_name": "Get Latest Opportunity Scan",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:19.879073"
+    },
+    {
+      "test_name": "Get All Lessons",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:19.915869"
+    },
+    {
+      "test_name": "Get Beginner Lessons",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:19.950867"
+    },
+    {
+      "test_name": "Complete Lesson",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:20.032809"
+    },
+    {
+      "test_name": "Get Progress",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:20.073638"
+    },
+    {
+      "test_name": "Send Chat Message",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:32.866612"
+    },
+    {
+      "test_name": "Get Chat History",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:32.932581"
+    },
+    {
+      "test_name": "Get Market Overview",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:34.326921"
+    },
+    {
+      "test_name": "Get Stock Data (AAPL)",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:34.476862"
+    },
+    {
+      "test_name": "Get Dashboard Stats",
+      "success": true,
+      "details": "Status: 200",
+      "timestamp": "2026-01-03T05:27:34.514126"
     }
   ]
 }
