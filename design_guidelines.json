@@ -1,0 +1,166 @@
+{
+  "design_system": {
+    "identity": {
+      "name": "Financial Empowerment AI",
+      "archetype": "The Swiss Botanist",
+      "core_values": ["Growth", "Clarity", "Authority", "Nature"],
+      "vibe": "A high-end private bank meets a futuristic greenhouse. Precise, data-driven, but organic and alive."
+    },
+    "typography": {
+      "font_family": {
+        "headings": "Outfit, sans-serif",
+        "body": "Inter, sans-serif",
+        "mono": "JetBrains Mono, monospace"
+      },
+      "weights": {
+        "headings": "600 (SemiBold) or 300 (Light) - High Contrast",
+        "body": "400 (Regular)",
+        "bold": "700 (Bold)"
+      },
+      "scale": {
+        "h1": "text-5xl md:text-7xl tracking-tight leading-none",
+        "h2": "text-4xl md:text-5xl tracking-tight",
+        "h3": "text-2xl md:text-3xl tracking-normal",
+        "body": "text-base md:text-lg leading-relaxed",
+        "caption": "text-xs uppercase tracking-widest font-mono"
+      },
+      "import_url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;600;700&display=swap"
+    },
+    "colors": {
+      "palette": {
+        "primary": {
+          "DEFAULT": "#064e3b",
+          "foreground": "#ffffff",
+          "description": "Deep Emerald - Wealth, Stability"
+        },
+        "secondary": {
+          "DEFAULT": "#ecfccb",
+          "foreground": "#1a2e05",
+          "description": "Pale Lime - New Growth, Backgrounds"
+        },
+        "accent": {
+          "DEFAULT": "#84cc16",
+          "foreground": "#000000",
+          "description": "Electric Lime - Action, AI, Energy"
+        },
+        "background": {
+          "light": "#fafaf9",
+          "dark": "#0c0a09"
+        },
+        "surface": {
+          "light": "#ffffff",
+          "dark": "#1c1917"
+        },
+        "text": {
+          "primary": "#1c1917",
+          "secondary": "#57534e",
+          "muted": "#a8a29e"
+        }
+      },
+      "gradients": {
+        "hero": "bg-gradient-to-br from-emerald-900 via-emerald-950 to-black",
+        "card_hover": "hover:bg-gradient-to-br hover:from-white hover:to-lime-50",
+        "text_highlight": "bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-lime-600"
+      }
+    },
+    "layout": {
+      "spacing": {
+        "container_padding": "p-6 md:p-12 lg:p-24",
+        "section_gap": "gap-16 md:gap-32",
+        "element_gap": "gap-4 md:gap-8"
+      },
+      "grids": {
+        "marketing": "grid grid-cols-1 md:grid-cols-12 gap-8 (The Tetris Grid)",
+        "dashboard": "grid grid-cols-1 md:grid-cols-4 gap-6 (The Control Room)"
+      },
+      "border_radius": {
+        "card": "rounded-xl",
+        "button": "rounded-full",
+        "input": "rounded-lg"
+      }
+    },
+    "visual_enhancers": {
+      "glassmorphism": "bg-white/70 backdrop-blur-xl border border-white/20 shadow-sm",
+      "shadows": {
+        "card": "shadow-[0_2px_8px_rgba(0,0,0,0.04)]",
+        "floating": "shadow-[0_12px_32px_rgba(6,78,59,0.15)]"
+      },
+      "textures": "Use subtle noise overlays on dark backgrounds to prevent banding and add 'paper' feel."
+    },
+    "motion": {
+      "transitions": "transition-all duration-300 ease-out",
+      "hover_lift": "hover:-translate-y-1 hover:shadow-lg",
+      "micro_interactions": "Active states should feel 'snappy' (duration-150), Entrance animations should be 'lazy' (duration-700)."
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 py-3 font-medium transition-all hover:scale-105",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full px-8 py-3 font-medium",
+      "outline": "border-2 border-primary/20 text-primary hover:border-primary hover:bg-primary/5 rounded-full px-8 py-3"
+    },
+    "cards": {
+      "dashboard": "bg-card text-card-foreground rounded-xl border border-border/50 shadow-sm p-6 hover:border-primary/20 transition-colors",
+      "feature": "group relative overflow-hidden rounded-2xl bg-stone-50 p-8 hover:bg-white hover:shadow-xl transition-all duration-500"
+    },
+    "inputs": {
+      "default": "flex h-12 w-full rounded-lg border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_main": {
+        "url": "https://images.unsplash.com/photo-1758611972895-34286de80d4e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBncm93dGglMjBzdWNjZXNzfGVufDB8fHx8MTc2NzQxNzM1Nnww&ixlib=rb-4.1.0&q=85",
+        "alt": "Man relaxing with money falling - symbolizing financial freedom",
+        "usage": "Landing Page Hero Background or Split Screen Image"
+      },
+      "community_team": {
+        "url": "https://images.unsplash.com/photo-1758873268631-fa944fc5cad2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBvZmZpY2UlMjB0ZWFtJTIwZGl2ZXJzZXxlbnwwfHx8fDE3Njc0MTczNTl8MA&ixlib=rb-4.1.0&q=85",
+        "alt": "Diverse team in modern office",
+        "usage": "About Us or Community Section"
+      },
+      "tech_abstract": {
+        "url": "https://images.unsplash.com/photo-1765046255479-669cf07a0230?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGRhdGElMjB2aXN1YWxpemF0aW9uJTIwdGVjaG5vbG9neXxlbnwwfHx8fDE3Njc0MTczNjB8MA&ixlib=rb-4.1.0&q=85",
+        "alt": "Abstract data visualization",
+        "usage": "Background for 'Opportunity Scanner' or 'AI Advisor' sections"
+      }
+    },
+    "icons": {
+      "library": "lucide-react",
+      "style": "Stroke width 1.5px (Light/Elegant)",
+      "usage": "Use Lucide icons for all UI elements. For feature illustrations, use large, colored Lucide icons with background blobs."
+    }
+  },
+  "implementation_plan": {
+    "phase_1_setup": [
+      "Install fonts: Outfit, JetBrains Mono",
+      "Configure Tailwind colors (Emerald/Lime/Stone)",
+      "Set up 'sonner' for toasts"
+    ],
+    "phase_2_marketing": [
+      "Build Landing Page with 'Tetris Grid' layout",
+      "Implement 'Hero' section with the relaxing man image",
+      "Create 'Feature' cards with hover lift effects"
+    ],
+    "phase_3_dashboard": [
+      "Build 'Control Room' layout for the main dashboard",
+      "Implement 'Income Generation' and 'Budget' widgets",
+      "Use Recharts for financial data visualization (Emerald/Lime palette)"
+    ],
+    "phase_4_ai": [
+      "Create 'AI Advisor' chat interface using Glassmorphism",
+      "Ensure 'Opportunity Scanner' uses the abstract tech image as a subtle background"
+    ]
+  },
+  "universal_guidelines": {
+    "testing": "All interactive elements MUST have a 'data-testid' attribute (e.g., 'login-btn', 'nav-home').",
+    "accessibility": "Ensure text contrast is > 4.5:1. Use 'sr-only' for icon-only buttons.",
+    "responsive": "Mobile-first. Images max-h-[80vh] on mobile. Padding reduced on mobile.",
+    "anti_patterns": [
+      "NO generic blue/white corporate themes.",
+      "NO 'Inter' for headings.",
+      "NO full-screen gradients without texture.",
+      "NO centered text for long paragraphs."
+    ]
+  }
+}
