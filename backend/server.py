@@ -346,7 +346,7 @@ async def get_lessons(level: str = "beginner"):
         }
     ]
     
-    return [EducationLesson(**lesson) for lesson in lessons_data if lesson['level'] == level or level == \"all\"]
+    return [EducationLesson(**lesson) for lesson in lessons_data if lesson['level'] == level or level == "all"]
 
 @api_router.post("/education/complete/{lesson_id}", response_model=UserProgress)
 async def complete_lesson(lesson_id: str, user_id: str = Depends(verify_token)):
