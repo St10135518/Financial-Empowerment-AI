@@ -37,7 +37,7 @@ api_router = APIRouter(prefix="/api")
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
@@ -51,30 +51,17 @@ async def register(user_data: UserCreate):
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     
-    # Create user
+    # Create user and related records
     user = User(
         email=user_data.email,
         password_hash=hash_password(user_data.password),
         full_name=user_data.full_name
     )
-    
-    user_dict = user.model_dump()
-    user_dict['created_at'] = user_dict['created_at'].isoformat()
-    await db.users.insert_one(user_dict)
-    
-    # Create default financial profile
-    profile = FinancialProfile(user_id=user.id)
-    profile_dict = profile.model_dump()
-    profile_dict['updated_at'] = profile_dict['updated_at'].isoformat()
-    await db.financial_profiles.insert_one(profile_dict)
-    
-    # Create user progress
-    progress = UserProgress(user_id=user.id)
-    progress_dict = progress.model_dump()
-    progress_dict['updated_at'] = progress_dict['updated_at'].isoformat()
-    await db.user_progress.insert_one(progress_dict)
-    
-    # Create token
+    await db.users.insert_one(user.model_dump())
+    await db.financial_profiles.insert_one(FinancialProfile(user_id=user.id).model_dump())
+    await db.user_progress.insert_one(UserProgress(user_id=user.id).model_dump())
+
+    # Create access token
     token = create_access_token({"user_id": user.id})
     
     return {
@@ -306,47 +293,14 @@ async def get_latest_opportunity_scan(user_id: str = Depends(verify_token)):
 # ==================== EDUCATION ROUTES ====================
 
 @api_router.get("/education/lessons", response_model=List[EducationLesson])
-async def get_lessons(level: str = "beginner"):
-    lessons_data = [
-        {
-            "id": "1",
-            "title": "Understanding Compound Interest",
-            "category": "Basics",
-            "level": "beginner",
-            "content": "Learn how your money can grow exponentially over time",
-            "duration_minutes": 15,
-            "points": 100
-        },
-        {
-            "id": "2",
-            "title": "Creating Your First Budget",
-            "category": "Budgeting",
-            "level": "beginner",
-            "content": "Step-by-step guide to tracking income and expenses",
-            "duration_minutes": 20,
-            "points": 150
-        },
-        {
-            "id": "3",
-            "title": "Introduction to Stock Market",
-            "category": "Investing",
-            "level": "intermediate",
-            "content": "Understanding stocks, bonds, and market basics",
-            "duration_minutes": 30,
-            "points": 200
-        },
-        {
-            "id": "4",
-            "title": "Tax Optimization Strategies",
-            "category": "Advanced",
-            "level": "advanced",
-            "content": "Legal ways to minimize tax burden and maximize savings",
-            "duration_minutes": 45,
-            "points": 300
-        }
-    ]
+async def get_lessons(level: str = "beginner", user_id: str = Depends(verify_token)):
+    """Get personalized education lessons based on user profile and level"""
+    profile = await db.financial_profiles.find_one({"user_id": user_id}, {"_id": 0})
     
-    return [EducationLesson(**lesson) for lesson in lessons_data if lesson['level'] == level or level == "all"]
+    # Generate personalized lessons using AI
+    lessons_data = await ai_advisor.generate_personalized_lessons(level, profile or {})
+    
+    return [EducationLesson(**lesson) for lesson in lessons_data]
 
 @api_router.post("/education/complete/{lesson_id}", response_model=UserProgress)
 async def complete_lesson(lesson_id: str, user_id: str = Depends(verify_token)):
@@ -382,6 +336,7 @@ async def get_progress(user_id: str = Depends(verify_token)):
 # ==================== AI CHAT ROUTES ====================
 
 @api_router.post("/ai-chat", response_model=Dict[str, str])
+@api_router.post("/ai/chat", response_model=Dict[str, str])
 async def chat_with_ai(chat_request: ChatRequest, user_id: str = Depends(verify_token)):
     profile = await db.financial_profiles.find_one({"user_id": user_id}, {"_id": 0})
     
@@ -393,6 +348,8 @@ async def chat_with_ai(chat_request: ChatRequest, user_id: str = Depends(verify_
         user_profile=profile,
         chat_history=history
     )
+    if not response:
+        logger.warning("AI response empty; returning fallback text")
     
     # Save messages
     user_msg = ChatMessage(user_id=user_id, role="user", content=chat_request.message)
@@ -408,6 +365,7 @@ async def chat_with_ai(chat_request: ChatRequest, user_id: str = Depends(verify_
     return {"response": response}
 
 @api_router.get("/ai-chat/history", response_model=List[ChatMessage])
+@api_router.get("/ai/chat/history", response_model=List[ChatMessage])
 async def get_chat_history(user_id: str = Depends(verify_token)):
     messages = await db.chat_messages.find({"user_id": user_id}, {"_id": 0}).sort("timestamp", -1).limit(50).to_list(50)
     
@@ -416,6 +374,26 @@ async def get_chat_history(user_id: str = Depends(verify_token)):
             msg['timestamp'] = datetime.fromisoformat(msg['timestamp'])
     
     return [ChatMessage(**msg) for msg in reversed(messages)]
+
+# ==================== HEALTH ROUTES ====================
+
+@api_router.get("/health/llm")
+async def llm_health_check():
+    try:
+        has_key = bool(os.environ.get('GROQ_API_KEY'))
+        client_inited = ai_advisor.client is not None
+        test = await ai_advisor._call_llm("Reply with OK.")
+        ok = test.strip().upper().startswith("OK") or len(test.strip()) > 0
+        return {
+            "status": "up" if ok else "degraded",
+            "sample": test[:160],
+            "groq_key_present": has_key,
+            "client_initialized": client_inited,
+            "last_error": getattr(ai_advisor, 'last_error', None)
+        }
+    except Exception as e:
+        logger.exception("LLM health check failed")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # ==================== MARKET DATA ROUTES ====================
 
@@ -455,6 +433,8 @@ async def get_dashboard_stats(user_id: str = Depends(verify_token)):
         "completed_lessons": len(progress.get('completed_lessons', [])),
         "current_streak": progress.get('current_streak', 0)
     }
+
+# (duplicate health route removed above)
 
 # Include router
 app.include_router(api_router)

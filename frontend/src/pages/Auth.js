@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api, setAuthToken } from '../utils/api';
+import { api, setAuthToken, isAuthenticated } from '../utils/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,6 +16,13 @@ function Auth() {
     password: '',
     full_name: ''
   });
+
+  // If already authenticated, skip auth page
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate('/dashboard');
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

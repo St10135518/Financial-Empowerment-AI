@@ -9,7 +9,7 @@ load_dotenv(ROOT_DIR / '.env')
 
 class MarketDataService:
     def __init__(self):
-        self.alpha_vantage_key = os.environ.get('ALPHA_VANTAGE_KEY')
+        self.alpha_vantage_key = os.environ.get('ALPHA_VANTAGE_API_KEY') or os.environ.get('ALPHA_VANTAGE_KEY')
         self.base_url = "https://www.alphavantage.co/query"
     
     def get_stock_quote(self, symbol: str) -> Dict[str, Any]:
